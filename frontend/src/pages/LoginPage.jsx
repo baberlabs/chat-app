@@ -22,66 +22,75 @@ const LoginPage = () => {
     login(formData);
   };
   return (
-    <div className="flex items-center justify-center h-screen w-full flex-col bg-gray-700 text-gray-100 ">
-      <h1 className="text-2xl font-black flex flex-row-reverse justify-between items-center gap-2">
-        <BotMessageSquare /> Chatr
-      </h1>
-
-      <form className="mt-10 w-80">
-        <h2 className="text-4xl font-bold mb-8 text-center">Welcome</h2>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2" htmlFor="email">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full p-2 bg-gray-800 rounded"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2" htmlFor="password">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="w-full p-2 bg-gray-800 rounded"
-            placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </div>
-        {isLoggingIn ? (
+    <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 text-gray-100">
+      <div className="bg-gray-800 bg-opacity-90 rounded-xl shadow-2xl p-10 flex flex-col items-center w-full max-w-md">
+        <h1 className="text-3xl font-extrabold flex items-center gap-3 mb-8 text-blue-400 drop-shadow-lg">
+          <BotMessageSquare size={36} className="text-blue-500" />
+          Chatr
+        </h1>
+        <form className="w-full" onSubmit={handleSubmit} autoComplete="off">
+          <h2 className="text-4xl font-bold mb-8 text-center text-white">
+            Welcome
+          </h2>
+          <div className="mb-6">
+            <label
+              className="block text-sm font-semibold mb-2 text-gray-300"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="w-full p-3 bg-gray-900 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-sm font-semibold mb-2 text-gray-300"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="w-full p-3 bg-gray-900 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
           <button
             type="submit"
-            className="mt-2 w-full bg-blue-900 text-white p-2 rounded transition duration-200 cursor-progress italic font-bold"
+            className={`mt-2 w-full p-3 rounded-lg font-bold transition-colors ${
+              isLoggingIn
+                ? "bg-blue-900 text-white cursor-progress italic opacity-70"
+                : "bg-blue-500 text-white hover:bg-blue-600 cursor-pointer"
+            }`}
             disabled={isLoggingIn}
           >
-            Logging In...
+            {isLoggingIn ? "Logging In..." : "Login"}
           </button>
-        ) : (
-          <button
-            type="submit"
-            className="mt-2 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 font-bold cursor-pointer transition-colors"
-            onClick={handleSubmit}
+        </form>
+        <p className="mt-6 text-sm text-gray-400">
+          Don't have an account?{" "}
+          <a
+            href="/register"
+            className="text-blue-400 underline hover:text-blue-300 transition"
           >
-            Login
-          </button>
-        )}
-      </form>
-      <p className="mt-4 text-sm text-gray-300">
-        Don't have an account?{" "}
-        <a href="/register" className="text-gray-100 underline">
-          Register here
-        </a>
-        .
-      </p>
+            Register here
+          </a>
+          .
+        </p>
+      </div>
     </div>
   );
 };
